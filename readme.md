@@ -7,6 +7,25 @@ The objective of this project is to set up a high-availability PostgreSQL cluste
 Linux (RHEL) using streaming replication and automatic failover. This setup aims to ensure that the 
 PostgreSQL database remains available and resilient to server failures.
 
+```mermaid
+graph TD;
+    A[Primary Node] -->|Stream Replication| B[Standby Node 1]
+    A -->|Stream Replication| C[Standby Node 2]
+    A -->|Stream Replication| D[Standby Node 3]
+    B --> E[Failover Mechanism]
+    C --> E[Failover Mechanism]
+    D --> E[Failover Mechanism]
+    E -->|Automatic Failover| A[Primary Node]
+    E -->|New Primary Node| B[Standby Node 1]
+    E -->|New Primary Node| C[Standby Node 2]
+    E -->|New Primary Node| D[Standby Node 3]
+
+    subgraph Failover Mechanism
+        E[Failover Manager]
+    end
+
+```
+
 ## Project Overview
 
 1. **Planning and Preparation**
